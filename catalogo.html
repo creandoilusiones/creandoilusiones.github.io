@@ -88,6 +88,28 @@
   <nav class="pills jump wrap" aria-label="Categorías" id="jump"></nav>
   <div id="catalogo"></div>
 
+  <section id="ideas" class="bg-white">
+    <div class="wrap">
+      <div class="cat-head"><h2>Ideas para <span class="script pink">inspirarte</span></h2><span class="script pink">Diseños de ejemplo</span></div>
+      <p class="lead" style="margin-bottom:24px">Elige uno de estos diseños o cuéntame el tuyo: tu nombre, tu personaje favorito o tu foto.</p>
+      <div class="ideas">
+        <figure><img src="fotos/ideas/idea-9.jpg" alt="Neceser con nombre y lazo" loading="lazy"><figcaption>Neceser con tu nombre</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-1.jpg" alt="Neceser con fantasma y flores" loading="lazy"><figcaption>Neceser</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-6.jpg" alt="Neceser con Stitch de Halloween" loading="lazy"><figcaption>Neceser Halloween</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-8.jpg" alt="Neceser de astronauta" loading="lazy"><figcaption>Neceser astronauta</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-15.jpg" alt="Taza mágica Boo" loading="lazy"><figcaption>Taza mágica</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-16.jpg" alt="Taza mágica Jack" loading="lazy"><figcaption>Taza mágica</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-17.jpg" alt="Mochila de saco otoñal" loading="lazy"><figcaption>Mochila de saco</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-21.jpg" alt="Mochila de saco con Stitch" loading="lazy"><figcaption>Mochila de saco</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-19.jpg" alt="Botella con diseño otoñal" loading="lazy"><figcaption>Botella de agua</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-29.jpg" alt="Botella de Spider-Man" loading="lazy"><figcaption>Botella de agua</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-22.jpg" alt="Puzzle de dinosaurios" loading="lazy"><figcaption>Puzzle</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-23.jpg" alt="Puzzle de Navidad" loading="lazy"><figcaption>Puzzle navideño</figcaption></figure>
+        <figure><img src="fotos/ideas/idea-24.jpg" alt="Puzzle de Halloween" loading="lazy"><figcaption>Puzzle Halloween</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
   <section class="print-only center" style="padding-top:6mm">
     <p><strong>Pedidos:</strong> WhatsApp <span data-wa-number></span> · Instagram @<span data-ig></span> · creandoilusiones.github.io</p>
   </section>
@@ -117,7 +139,7 @@ const CATALOGO = [
     { nombre: "Bola roja redonda pequeña", foto: "", precio: "4,50 € – 5,00 €" },
   ]},
   { id: "halloween", titulo: "Halloween", sub: "Edición limitada", fondo: "bg-blush", productos: [
-    { nombre: "Taza mágica de Halloween", foto: "", precio: "18,00 €" },
+    { nombre: "Taza mágica de Halloween", foto: "ideas/idea-13.jpg", pos: "top", precio: "18,00 €", detalle: "El diseño aparece con el calor" },
     { nombre: "Libro para colorear", foto: "libro-colorear-halloween.jpg", precio: "5,00 €", badge: "¡Nuevo!" },
     { nombre: "Cajita de caramelos", foto: "cajita-caramelos-halloween.jpg", precio: "5,00 €", detalle: "Con caramelos 8,00 €" },
     { nombre: "Mochila de Halloween", foto: "mochila-halloween.jpg", precio: "12,00 € – 14,00 €" },
@@ -132,10 +154,10 @@ const CATALOGO = [
     { nombre: "Cesta de cumpleaños", foto: "cesta-dragon-ball.jpg", precio: "Según contenido", detalle: "Temática a elegir, con dedicatoria" },
     { nombre: "Cesta para baby shower", foto: "baby-shower.jpg", precio: "Según contenido" },
     { nombre: "Decoración de cumpleaños", foto: "decoracion-cumple.jpg", precio: "Pide presupuesto" },
-    { nombre: "Neceser", foto: "neceser.jpg", precio: "6,00 €" },
+    { nombre: "Neceser", foto: "ideas/idea-2.jpg", pos: "top", precio: "6,00 €" },
     { nombre: "Cuadros", foto: "", precio: "Desde 20,00 € + marco", detalle: "Minimalistas 20 € · Otros estilos 20 – 30 €" },
     { nombre: "Azulejo", foto: "", precio: "15,00 €", detalle: "Con tu foto, nombre o mensaje" },
-    { nombre: "Botella de agua", foto: "botella.jpg", precio: "¡Próximamente!" },
+    { nombre: "Botella de agua", foto: "ideas/idea-28.jpg", precio: "¡Próximamente!" },
   ]},
   { id: "colegio", titulo: "Etiquetas y colegio", sub: "Vuelta al cole", fondo: "bg-blush", productos: [
     { nombre: "Etiquetas para el cole", foto: "etiquetas.jpg", precio: "Desde 1,00 €", detalle: "Botella / tupper 2 € / u · Pack 25 + 8: 10 – 12 € · Folio agua 14 € · Folio plancha 18 €" },
@@ -157,7 +179,7 @@ const CATALOGO = [
     const items = cat.productos.map((p) => (
       '<article class="item">' +
         (p.foto
-          ? '<div class="pic"><img src="fotos/' + esc(p.foto) + '" alt="' + esc(p.nombre) + '" loading="lazy"></div>'
+          ? '<div class="pic"><img src="fotos/' + esc(p.foto) + '" alt="' + esc(p.nombre) + '" loading="lazy"' + (p.pos ? ' style="object-position:' + esc(p.pos) + '"' : "") + '></div>'
           : '<div class="pic none" aria-hidden="true">' + esc(p.nombre) + "</div>") +
         '<div class="body">' +
           (p.badge ? '<span class="badge">' + esc(p.badge) + "</span>" : "") +
@@ -174,6 +196,12 @@ const CATALOGO = [
         '<div class="grid">' + items + "</div>" +
       "</div></section>");
   });
+
+  jump.insertAdjacentHTML("beforeend", '<a class="pill" href="#ideas">Ideas</a>');
+  if (location.hash) {
+    const target = document.getElementById(location.hash.slice(1));
+    if (target) { requestAnimationFrame(() => target.scrollIntoView()); window.addEventListener("load", () => target.scrollIntoView()); }
+  }
 
   const num = "+" + SITE.whatsapp.replace(/^(\d{2})(\d{3})(\d{3})(\d{3})$/, "$1 $2 $3 $4");
   document.querySelectorAll("[data-wa-number]").forEach((el) => (el.textContent = num));
