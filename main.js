@@ -39,4 +39,31 @@ const SITE = {
   });
   document.querySelectorAll("[data-zona]").forEach((el) => (el.textContent = SITE.zona));
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
+
+  document.querySelectorAll("[data-slider]").forEach((slider) => {
+    const track = slider.querySelector(".slides");
+    const slides = track.children;
+    const dots = slider.querySelector(".dots");
+    const prev = slider.querySelector(".prev");
+    const next = slider.querySelector(".next");
+    const go = (i) => track.scrollTo({ left: i * track.clientWidth });
+    const current = () => Math.round(track.scrollLeft / track.clientWidth);
+    Array.from(slides).forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Foto " + (i + 1));
+      dot.addEventListener("click", () => go(i));
+      dots.appendChild(dot);
+    });
+    const update = () => {
+      const i = current();
+      Array.from(dots.children).forEach((d, j) => d.setAttribute("aria-current", String(i === j)));
+      prev.hidden = i === 0;
+      next.hidden = i === slides.length - 1;
+    };
+    prev.addEventListener("click", () => go(current() - 1));
+    next.addEventListener("click", () => go(current() + 1));
+    track.addEventListener("scroll", update, { passive: true });
+    update();
+  });
 })();
