@@ -175,3 +175,4 @@ section { padding: clamp(56px, 8vw, 96px) 0; }
 .slider .dots { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; }
 .slider .dots button { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 2px solid var(--brown); background: #fff; cursor: pointer; }
 .slider .dots button[aria-current="true"] { background: var(--pink); }
+.slider .slide.contain img { object-fit: contain; background: #fff; }
