@@ -3,7 +3,7 @@ const SITE = {
   whatsapp: "34614116121", // solo números, con 34 delante
   instagram: "creandoilusiones.regalos",
   email: "", // vacío = se ocultan los enlaces de correo
-  zona: "Recogida disponible · consulta por WhatsApp",
+  zona: "Recogida o entrega en mano · Envío gratis desde 80 €",
 };
 
 (function () {
