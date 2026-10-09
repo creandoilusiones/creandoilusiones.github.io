@@ -40,7 +40,9 @@ const SITE = {
   document.querySelectorAll("[data-zona]").forEach((el) => (el.textContent = SITE.zona));
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 
-  document.querySelectorAll("[data-slider]").forEach((slider) => {
+  window.initSliders = (root) => root.querySelectorAll("[data-slider]").forEach((slider) => {
+    if (slider.dataset.ready) return;
+    slider.dataset.ready = "1";
     const track = slider.querySelector(".slides");
     const slides = track.children;
     const dots = slider.querySelector(".dots");
@@ -66,4 +68,5 @@ const SITE = {
     track.addEventListener("scroll", update, { passive: true });
     update();
   });
+  window.initSliders(document);
 })();

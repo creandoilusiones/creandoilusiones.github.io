@@ -26,6 +26,9 @@
     .item { background: #fff; border: 2px solid var(--brown); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
     .item .pic { aspect-ratio: 1; background: var(--blush); position: relative; overflow: hidden; }
     .item .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .item .pic .slides { position: absolute; inset: 0; height: auto; }
+    .item .pic .slide img { position: absolute; inset: 0; }
+    .item .pic .slide-arrow { width: 30px; height: 30px; font-size: 20px; }
     .item .pic.none { display: grid; place-items: center; font-family: var(--display); color: var(--pink); font-size: clamp(18px, 3vw, 24px); text-align: center; padding: 12px; background: repeating-linear-gradient(45deg, var(--blush) 0 14px, #fff1f6 14px 28px); }
     .item .body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
     .item h3 { font-family: var(--sans); font-weight: 700; font-size: 16px; line-height: 1.25; }
@@ -41,7 +44,7 @@
     @media print {
       @page { size: A4; margin: 12mm; }
       body { background: #fff; font-size: 11pt; }
-      .site-header, .site-footer, .cat-tools, .jump, .order { display: none !important; }
+      .site-header, .site-footer, .cat-tools, .jump, .order, .slide-arrow, .dots, .slide-label { display: none !important; }
       .print-only { display: block; }
       .cat-hero { padding-block: 0 8mm; }
       .cat-section { padding-block: 6mm; break-before: page; }
@@ -130,6 +133,7 @@
 <script>
 // Catálogo: para añadir o cambiar un producto, edita esta lista.
 // foto: nombre del archivo en /fotos (o "" si aún no hay foto)
+// fotos: (opcional) más fotos que se ven deslizando, después de la principal
 const CATALOGO = [
   { id: "temporada", titulo: "Temporada", sub: "Bolas de Navidad", fondo: "bg-white", productos: [
     { nombre: "Bolas rellenables", foto: "bola-rellenable-foto.jpg", precio: "5,00 € – 7,50 €", detalle: "Grande 6,50 – 7,50 € · Pequeña 5,00 €" },
@@ -142,26 +146,76 @@ const CATALOGO = [
     { nombre: "Bola roja redonda pequeña", foto: "bola-roja-papa.jpg", precio: "4,50 € – 5,00 €", detalle: "Con el nombre que quieras" },
   ]},
   { id: "halloween", titulo: "Halloween", sub: "Edición limitada", fondo: "bg-blush", productos: [
-    { nombre: "Taza mágica de Halloween", foto: "ideas/idea-13.jpg", pos: "top", precio: "18,00 €", detalle: "El diseño aparece con el calor" },
+    { nombre: "Taza mágica de Halloween", foto: "ideas/idea-13.jpg", pos: "top", precio: "18,00 €", detalle: "El diseño aparece con el calor",
+      fotos: [
+        { src: "mockups/m-11.jpg", alt: "Taza mágica gato y luna", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-12.jpg", alt: "Taza mágica calavera mexicana", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-15.jpg", alt: "Taza mágica Boo", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-16.jpg", alt: "Taza mágica Jack", pos: "top", label: "Idea de diseño" },
+      ] },
     { nombre: "Libro para colorear", foto: "libro-colorear-halloween.jpg", precio: "5,00 €", badge: "¡Nuevo!" },
     { nombre: "Cajita de caramelos", foto: "cajita-caramelos-halloween.jpg", precio: "5,00 €", detalle: "Con caramelos 8,00 €" },
-    { nombre: "Mochila de Halloween", foto: "mochila-halloween.jpg", precio: "12,00 € – 14,00 €" },
+    { nombre: "Mochila de Halloween", foto: "mochila-halloween.jpg", precio: "12,00 € – 14,00 €",
+      fotos: [
+        { src: "mockups/m-20.jpg", alt: "Mochila de saco Scream", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-21.jpg", alt: "Mochila de saco Stitch de Halloween", pos: "top", label: "Idea de diseño" },
+      ] },
   ]},
   { id: "regalos", titulo: "Regalos personalizados", sub: "Para regalar", fondo: "bg-white", productos: [
-    { nombre: "Velas", foto: "velas-cupcake.jpg", precio: "Desde 3,00 €", detalle: "Cupcake: vainilla + chocolate, chocolate, caramelo + chocolate o candy · Formas y colores", badge: "¡Nuevo!" },
-    { nombre: "Mochila de saco", foto: "mochila-cerezas.jpg", precio: "12,00 € – 14,00 €", detalle: "Poliéster 12,00 € · Algodón grande 14,00 €", badge: "Lo más pedido" },
-    { nombre: "Taza personalizada", foto: "taza.jpg", precio: "Desde 12,00 €", detalle: "Blanca 325 ml 12,00 € · De color 13,00 € · Grande 425 ml (blanca) 14,00 € · Mágica 18,00 €" },
+    { nombre: "Velas", foto: "velas-cupcake.jpg", precio: "Desde 3,00 €", detalle: "Cupcake: vainilla + chocolate, chocolate, caramelo + chocolate o candy · Formas y colores", badge: "¡Nuevo!",
+      fotos: [
+        { src: "velas-cupcake-3.jpg", alt: "Tres velas cupcake de chocolate y chocolate blanco" },
+        { src: "velas-sabores.jpg", alt: "Velas cupcake de vainilla y chocolate, chocolate, caramelo y chocolate, y candy", label: "Sabores" },
+        { src: "velas-formas.jpg", alt: "Velas con forma de pluma, geométrica y flor" },
+        { src: "vela-lila.jpg", alt: "Vela lila en espiral en la mano" },
+      ] },
+    { nombre: "Mochila de saco", foto: "mochila-cerezas.jpg", precio: "12,00 € – 14,00 €", detalle: "Poliéster 12,00 € · Algodón grande 14,00 €", badge: "Lo más pedido",
+      fotos: [
+        { src: "mockups/m-18.jpg", alt: "Mochila de saco Iron Man", pos: "top", label: "Idea de diseño" },
+      ] },
+    { nombre: "Taza personalizada", foto: "taza.jpg", precio: "Desde 12,00 €", detalle: "Blanca 325 ml 12,00 € · De color 13,00 € · Grande 425 ml (blanca) 14,00 € · Mágica 18,00 €",
+      fotos: [
+        { src: "taza-grande-comparacion.jpg", alt: "Taza grande de 425 ml al lado de una taza normal de 325 ml", label: "Grande 425 ml vs. normal 325 ml" },
+      ] },
     { nombre: "Camiseta", foto: "camiseta.jpg", precio: "Desde 8,00 €", detalle: "Toddlers desde 8,00 € · Niños desde 10,00 € · Adultos desde 14,00 €" },
     { nombre: "Llaveros", foto: "llavero.jpg", precio: "Desde 2,50 € / u", detalle: "Sueltos 6,00 € · Hasta 20: 4 € · Hasta 50: 3 € · +50: 2,50 €" },
-    { nombre: "Puzzle", foto: "puzzle.jpg", precio: "12,00 €", detalle: "Desde 8,00 €" },
+    { nombre: "Puzzle", foto: "puzzle.jpg", precio: "12,00 €", detalle: "Desde 8,00 €",
+      fotos: [
+        { src: "mockups/m-22.jpg", alt: "Puzzle de dinosaurios", contain: true, label: "Idea de diseño" },
+        { src: "mockups/m-23.jpg", alt: "Puzzle de Navidad", contain: true, label: "Idea de diseño" },
+        { src: "mockups/m-24.jpg", alt: "Puzzle de Halloween", contain: true, label: "Idea de diseño" },
+        { src: "mockups/m-25.jpg", alt: "Puzzle de flamenca y España", contain: true, label: "Idea de diseño" },
+      ] },
     { nombre: "Vasos y copas", foto: "vasos.jpg", precio: "Desde 15,00 €", detalle: "Copas de champán 15,00 € · Otros diseños según diseño" },
     { nombre: "Cesta de cumpleaños", foto: "cesta-dragon-ball.jpg", precio: "Según contenido", detalle: "Temática a elegir · Precio especial por cantidad" },
     { nombre: "Cesta para baby shower", foto: "baby-shower.jpg", precio: "Según contenido", detalle: "Precio especial por cantidad" },
     { nombre: "Decoración de cumpleaños", foto: "decoracion-cumple.jpg", precio: "Según lo que quieras", detalle: "Precio especial por cantidad" },
-    { nombre: "Neceser", foto: "ideas/idea-2.jpg", pos: "top", precio: "6,00 €" },
-    { nombre: "Cuadros", foto: "cuadro-1.jpg", pos: "center 30%",precio: "Desde 20,00 € + marco", detalle: "Minimalistas 20,00 € · Otros estilos 20,00 – 30,00 €" },
+    { nombre: "Neceser", foto: "ideas/idea-2.jpg", pos: "top", precio: "6,00 €",
+      fotos: [
+        { src: "mockups/m-1.jpg", alt: "Neceser fantasma con flores", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-3.jpg", alt: "Neceser de piruletas", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-4.jpg", alt: "Neceser otoñal", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-5.jpg", alt: "Neceser gato Catrina", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-6.jpg", alt: "Neceser Stitch de Halloween", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-8.jpg", alt: "Neceser de astronauta", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-9.jpg", alt: "Neceser navideño con nombre", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-10.jpg", alt: "Neceser Jack y Sally", pos: "top", label: "Idea de diseño" },
+      ] },
+    { nombre: "Cuadros", foto: "cuadro-1.jpg", pos: "center 30%",precio: "Desde 20,00 € + marco", detalle: "Minimalistas 20,00 € · Otros estilos 20,00 – 30,00 €",
+      fotos: [
+        { src: "cuadro-2.jpg", alt: "Cuadro ilustrado de una pareja besándose en un balcón al atardecer", pos: "top" },
+        { src: "cuadro-3.jpg", alt: "Cuadro ilustrado de una pareja en un barco frente al mar" },
+        { src: "cuadro-4.jpg", alt: "Cuadro ilustrado de un matrimonio con un corazón dibujado" },
+      ] },
     { nombre: "Azulejo", foto: "azulejo.jpg", precio: "15,00 €", detalle: "Con tu foto, nombre o frase" },
-    { nombre: "Botella de agua", foto: "ideas/idea-28.jpg", precio: "¡Próximamente!" },
+    { nombre: "Botella de agua", foto: "ideas/idea-28.jpg", precio: "¡Próximamente!",
+      fotos: [
+        { src: "mockups/m-19.jpg", alt: "Botella otoñal", pos: "top", label: "Idea de diseño" },
+        { src: "mockups/m-26.jpg", alt: "Botella Boo", contain: true, label: "Idea de diseño" },
+        { src: "mockups/m-27.jpg", alt: "Botella Jack y Sally", contain: true, label: "Idea de diseño" },
+        { src: "mockups/m-29.jpg", alt: "Botella de Spider-Man", contain: true, label: "Idea de diseño" },
+        { src: "mockups/m-31.jpg", alt: "Botella con nombre y mariposas", contain: true, label: "Idea de diseño" },
+      ] },
   ]},
   { id: "colegio", titulo: "Etiquetas y colegio", sub: "Vuelta al cole", fondo: "bg-blush", productos: [
     { nombre: "Etiquetas para el cole", foto: "etiquetas.jpg", precio: "Desde 1,00 €", detalle: "Botella / tupper 2 € / u · Pack 25 + 8: 10,00 – 12,00 € · Folio agua 14,00 € · Folio plancha 18,00 €" },
@@ -175,6 +229,10 @@ const CATALOGO = [
 (function () {
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const wa = (nombre) => "https://wa.me/" + SITE.whatsapp + "?text=" + encodeURIComponent("¡Hola Maria! Me interesa: " + nombre + ". ¿Me das más información?");
+  const slide = (f) =>
+    '<figure class="slide' + (f.contain ? " contain" : "") + '"><img src="fotos/' + esc(f.src) + '" alt="' + esc(f.alt) + '" loading="lazy"' +
+    (f.pos ? ' style="object-position:' + esc(f.pos) + '"' : "") + ">" +
+    (f.label ? '<figcaption class="slide-label">' + esc(f.label) + "</figcaption>" : "") + "</figure>";
   const cont = document.getElementById("catalogo");
   const jump = document.getElementById("jump");
 
@@ -182,7 +240,12 @@ const CATALOGO = [
     jump.insertAdjacentHTML("beforeend", '<a class="pill" href="#' + cat.id + '">' + esc(cat.titulo) + "</a>");
     const items = cat.productos.map((p) => (
       '<article class="item">' +
-        (p.foto
+        (p.foto && p.fotos
+          ? '<div class="pic slider" data-slider><div class="slides">' +
+              [{ src: p.foto, alt: p.nombre, pos: p.pos }].concat(p.fotos).map(slide).join("") +
+            '</div><button class="slide-arrow prev" type="button" aria-label="Foto anterior">‹</button>' +
+            '<button class="slide-arrow next" type="button" aria-label="Foto siguiente">›</button><div class="dots"></div></div>'
+          : p.foto
           ? '<div class="pic"><img src="fotos/' + esc(p.foto) + '" alt="' + esc(p.nombre) + '" loading="lazy"' + (p.pos ? ' style="object-position:' + esc(p.pos) + '"' : "") + '></div>'
           : '<div class="pic none" aria-hidden="true">' + esc(p.nombre) + "</div>") +
         '<div class="body">' +
@@ -201,6 +264,7 @@ const CATALOGO = [
       "</div></section>");
   });
 
+  window.initSliders(cont);
   jump.insertAdjacentHTML("beforeend", '<a class="pill" href="#ideas">Ideas</a>');
   if (location.hash) {
     const target = document.getElementById(location.hash.slice(1));
