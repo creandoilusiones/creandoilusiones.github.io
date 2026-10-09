@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:ital@1&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <link rel="icon" href="fotos/logo.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=3">
   <style>
     .cat-hero { padding-block: 40px 16px; text-align: center; }
     .cat-hero img.big-logo { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 14px; object-fit: cover; }
@@ -129,7 +129,7 @@
   <div class="wrap credit" style="margin-top:10px">Web por <a href="https://marketingmadre.github.io" style="margin:0">Marketing Madre</a></div>
 </footer>
 
-<script src="main.js"></script>
+<script src="main.js?v=3"></script>
 <script>
 // Catálogo: para añadir o cambiar un producto, edita esta lista.
 // foto: nombre del archivo en /fotos (o "" si aún no hay foto)
@@ -264,7 +264,7 @@ const CATALOGO = [
       "</div></section>");
   });
 
-  window.initSliders(cont);
+  if (window.initSliders) window.initSliders(cont);
   jump.insertAdjacentHTML("beforeend", '<a class="pill" href="#ideas">Ideas</a>');
   if (location.hash) {
     const target = document.getElementById(location.hash.slice(1));
