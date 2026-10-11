@@ -173,9 +173,13 @@ const CATALOGO = [
       fotos: [
         { src: "mockups/m-18.jpg", alt: "Mochila de saco Iron Man", pos: "top", label: "Idea de diseño" },
       ] },
-    { nombre: "Taza personalizada", foto: "taza.jpg", precio: "Desde 12,00 €", detalle: "Blanca 325 ml 12,00 € · De color 13,00 € · Grande 425 ml (blanca) 14,00 € · Mágica 18,00 €",
+    { nombre: "Taza personalizada", foto: "taza.jpg", precio: "Desde 12,00 €", detalle: "Blanca 325 ml 12,00 € · De color 13,50 € · Grande 425 ml (blanca) 14,00 € · Mágica 18,00 €",
       fotos: [
         { src: "taza-grande-comparacion.jpg", alt: "Taza grande de 425 ml al lado de una taza normal de 325 ml", label: "Grande 425 ml vs. normal 325 ml" },
+      ] },
+    { nombre: "Tazas para tu negocio", foto: "taza-negocio.jpg", contain: true, precio: "13,50 €", detalle: "Con tu logo, teléfono y redes · Interior y asa de color", badge: "¡Nuevo!",
+      fotos: [
+        { src: "taza-negocio-real.jpg", alt: "Taza de negocio con interior azul, foto real", pos: "center 65%", label: "Foto real" },
       ] },
     { nombre: "Camiseta", foto: "camiseta.jpg", precio: "Desde 8,00 €", detalle: "Toddlers desde 8,00 € · Niños desde 10,00 € · Adultos desde 14,00 €" },
     { nombre: "Llaveros", foto: "llavero.jpg", precio: "Desde 2,50 € / u", detalle: "Sueltos 6,00 € · Hasta 20: 4 € · Hasta 50: 3 € · +50: 2,50 €" },
@@ -186,7 +190,17 @@ const CATALOGO = [
         { src: "mockups/m-24.jpg", alt: "Puzzle de Halloween", contain: true, label: "Idea de diseño" },
         { src: "mockups/m-25.jpg", alt: "Puzzle de flamenca y España", contain: true, label: "Idea de diseño" },
       ] },
-    { nombre: "Vasos y copas", foto: "vasos.jpg", precio: "Desde 15,00 €", detalle: "Copas de champán 15,00 € · Otros diseños según diseño" },
+    { nombre: "Vasos y copas", foto: "vasos.jpg", precio: "Desde 7,50 €", detalle: "1 copa de champán 7,50 € · Pareja (x2) 12,00 € · Otros vasos y copas según diseño",
+      fotos: [
+        { src: "copas-boda.jpg", alt: "Copas de champán Por todo lo que somos y todo lo que nos queda por brindar, entre rosas blancas", pos: "center 30%" },
+        { src: "copas-blanco.jpg", alt: "Copas de champán cruzadas con frase y anillos dorados", contain: true },
+        { src: "copas-mano.jpg", alt: "Copas de champán personalizadas sujetas en la mano", pos: "center 40%", label: "Foto real" },
+      ] },
+    { nombre: "Cartera personalizada", foto: "cartera-blanca.jpg", precio: "15,00 €", detalle: "Blanca o negra · Con tu inicial, nombre, foto o diseño · Tarjeteros y ventana para el DNI", badge: "¡Nuevo!",
+      fotos: [
+        { src: "cartera-negra.jpg", alt: "Cartera negra personalizada con la inicial M y una corona de hojas" },
+        { src: "cartera-interior.jpg", alt: "Interior de la cartera negra con tarjeteros y ventana para el DNI", label: "Por dentro" },
+      ] },
     { nombre: "Cesta de cumpleaños", foto: "cesta-dragon-ball.jpg", precio: "Según contenido", detalle: "Temática a elegir · Precio especial por cantidad" },
     { nombre: "Cesta para baby shower", foto: "baby-shower.jpg", precio: "Según contenido", detalle: "Precio especial por cantidad" },
     { nombre: "Decoración de cumpleaños", foto: "decoracion-cumple.jpg", precio: "Según lo que quieras", detalle: "Precio especial por cantidad" },
@@ -242,7 +256,7 @@ const CATALOGO = [
       '<article class="item">' +
         (p.foto && p.fotos
           ? '<div class="pic slider" data-slider><div class="slides">' +
-              [{ src: p.foto, alt: p.nombre, pos: p.pos }].concat(p.fotos).map(slide).join("") +
+              [{ src: p.foto, alt: p.nombre, pos: p.pos, contain: p.contain }].concat(p.fotos).map(slide).join("") +
             '</div><button class="slide-arrow prev" type="button" aria-label="Foto anterior">‹</button>' +
             '<button class="slide-arrow next" type="button" aria-label="Foto siguiente">›</button><div class="dots"></div></div>'
           : p.foto
