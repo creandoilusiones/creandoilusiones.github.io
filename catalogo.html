@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:ital@1&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <link rel="icon" href="fotos/logo.png">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
   <style>
     .cat-hero { padding-block: 40px 16px; text-align: center; }
     .cat-hero img.big-logo { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 14px; object-fit: cover; }
@@ -135,7 +135,15 @@
 // foto: nombre del archivo en /fotos (o "" si aún no hay foto)
 // fotos: (opcional) más fotos que se ven deslizando, después de la principal
 const CATALOGO = [
-  { id: "temporada", titulo: "Temporada", sub: "Bolas de Navidad", fondo: "bg-white", productos: [
+  { id: "temporada", titulo: "Temporada", sub: "Navidad", fondo: "bg-white", productos: [
+    { nombre: "Pack 3 piezas", foto: "pack3-oso.jpg", precio: "35,00 €", detalle: "Mochila de tela + estuche completo + libreta · Mismo diseño en todo · Con su nombre y el personaje que quiera · Envuelto para regalar", badge: "¡Nuevo!",
+      fotos: [
+        { src: "pack3-inside-out.jpg", alt: "Pack de mochila, estuche y libreta con diseño de Del Revés", label: "Idea de diseño" },
+      ] },
+    { nombre: "Pack 4 piezas con botella", foto: "pack4-oso.jpg", precio: "50,00 €", detalle: "Mochila de tela + estuche completo + libreta + botella de acero · Mismo diseño en todo · Con su nombre y el personaje que quiera · Envuelto para regalar", badge: "¡Nuevo!",
+      fotos: [
+        { src: "pack4-inside-out.jpg", alt: "Pack de mochila, estuche, libreta y botella con diseño de Del Revés", label: "Idea de diseño" },
+      ] },
     { nombre: "Bolas rellenables", foto: "bola-rellenable-foto.jpg", precio: "5,00 € – 7,50 €", detalle: "Grande 6,50 – 7,50 € · Pequeña 5,00 €" },
     { nombre: "Bola plana 7,62 cm", foto: "bola-plana.jpg", precio: "6,00 €", detalle: "Pequeña 5,00 – 5,50 €" },
     { nombre: "Bola plana de madera 10,2 cm", foto: "bola-madera.jpg", precio: "6,00 € – 6,50 €", detalle: "Pequeña 5,00 – 5,50 €" },
@@ -233,11 +241,15 @@ const CATALOGO = [
       ] },
   ]},
   { id: "colegio", titulo: "Etiquetas y colegio", sub: "Vuelta al cole", fondo: "bg-blush", productos: [
-    { nombre: "Estuche completo", foto: "estuche-inside-out.jpg", precio: "14,00 €", detalle: "Con rotuladores, lápices de colores, bolígrafos, reglas, goma y sacapuntas · Con tu nombre, personaje o diseño · Se personaliza la parte blanca", badge: "¡Nuevo!",
+    { nombre: "Estuche completo", foto: "estuche-inside-out.jpg", precio: "14,00 €", detalle: "Con rotuladores, lápices de colores, regla pequeña, goma y lápiz bicolor · Con tu nombre, personaje o diseño · Se personaliza la parte blanca", badge: "¡Nuevo!",
       fotos: [
         { src: "estuche-combo.jpg", alt: "Estuche con diseño de Del Revés y todo el material que incluye", label: "Todo incluido" },
         { src: "estuche-interior.jpg", alt: "Estuche abierto con reglas, transportador y rotuladores de colores", label: "Por dentro" },
         { src: "estuche-sin-diseno.jpg", alt: "Estuche negro sin personalizar, con la parte delantera blanca, y todo el material", label: "Sin personalizar" },
+      ] },
+    { nombre: "Bloc de notas", foto: "bloc-inside-out.jpg", precio: "10,00 €", detalle: "De espiral · Portada con tu nombre, personaje o diseño · A juego con el estuche", badge: "¡Nuevo!",
+      fotos: [
+        { src: "bloc-sin-diseno.jpg", alt: "Bloc de notas de espiral con la portada blanca sin personalizar", label: "Sin personalizar" },
       ] },
     { nombre: "Etiquetas para el cole", foto: "etiquetas.jpg", precio: "Desde 1,00 €", detalle: "Botella / tupper 2 € / u · Pack 25 + 8: 10,00 – 12,00 € · Folio agua 14,00 € · Folio plancha 18,00 €" },
     { nombre: "Material didáctico", foto: "material-didactico-nombres.jpg", precio: "Impreso 6,00 €", detalle: "PDF 4,00 €" },

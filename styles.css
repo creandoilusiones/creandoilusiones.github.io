@@ -176,3 +176,19 @@ section { padding: clamp(56px, 8vw, 96px) 0; }
 .slider .dots button { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 2px solid var(--brown); background: #fff; cursor: pointer; }
 .slider .dots button[aria-current="true"] { background: var(--pink); }
 .slider .slide.contain img { object-fit: contain; background: #fff; }
+
+/* Promo banner (home) */
+section.promo { padding: 18px 0; background: var(--blush); border-bottom: 2px solid var(--brown); }
+.promo-inner { display: flex; align-items: center; gap: 20px; }
+.promo-inner img { width: 150px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; border: 2px solid var(--brown); flex: none; }
+.promo .tag { margin-bottom: 6px; font-size: 11px; padding: 3px 12px; }
+.promo h2 { font-size: clamp(22px, 3vw, 30px); }
+.promo p { font-size: 15px; color: var(--muted); }
+.promo p strong { color: var(--pink-dark); }
+.promo .btn { margin-left: auto; white-space: nowrap; padding: 10px 22px; }
+@media (max-width: 640px) {
+  .promo-inner { flex-wrap: wrap; gap: 12px 14px; }
+  .promo-inner img { width: 96px; }
+  .promo-inner > div { flex: 1 1 0; min-width: 0; }
+  .promo .btn { margin-left: 0; width: 100%; text-align: center; }
+}
