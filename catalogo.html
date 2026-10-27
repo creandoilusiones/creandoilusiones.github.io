@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:ital@1&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <link rel="icon" href="fotos/logo.png">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
   <style>
     .cat-hero { padding-block: 40px 16px; text-align: center; }
     .cat-hero img.big-logo { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 14px; object-fit: cover; }
@@ -34,6 +34,10 @@
     .item h3 { font-family: var(--sans); font-weight: 700; font-size: 16px; line-height: 1.25; }
     .item .price { color: var(--pink-dark); font-weight: 700; font-size: 15px; }
     .item .detail { color: var(--muted); font-size: 13px; line-height: 1.4; }
+    .item .lista { list-style: none; margin: 2px 0 0; padding: 0; font-size: 13px; line-height: 1.35; color: var(--brown); }
+    .item .lista li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-bottom: 1px dashed var(--blush); }
+    .item .lista li:last-child { border-bottom: 0; }
+    .item .lista b { white-space: nowrap; color: var(--pink-dark); }
     .item .badge { align-self: flex-start; background: var(--pink); color: #fff; font-size: 11px; font-weight: 700; border-radius: 4px; padding: 1px 7px; letter-spacing: 0.04em; }
     .item .order { margin-top: auto; padding-top: 10px; }
     .item .order a { display: block; text-align: center; background: var(--pink); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; border-radius: 999px; padding: 8px 10px; border: 2px solid var(--brown); }
@@ -177,6 +181,20 @@ const CATALOGO = [
         { src: "velas-formas.jpg", alt: "Velas con forma de pluma, geométrica y flor" },
         { src: "vela-lila.jpg", alt: "Vela lila en espiral en la mano" },
       ] },
+    { nombre: "Vidrieras pequeñas", foto: "vidriera-angeles.jpg", precio: "Desde 10,00 €", detalle: "Vidriera hecha a mano",
+      lista: [["Portavelas pequeño", "10,00 €"], ["Ángeles y adornos (máx. 10×10 cm)", "desde 15,00 €"], ["Portavelas grande", "20,00 € / u"], ["Farolillo de mosaico", "30,00 €"]], badge: "¡Nuevo!",
+      fotos: [
+        { src: "vidriera-portavelas-pequeno.jpg", alt: "Portavelas de vidriera con forma de flor de loto para vela pequeña", label: "Portavelas pequeño" },
+        { src: "vidriera-portavelas-grande.jpg", alt: "Portavelas de vidriera rojos con forma de flor de loto, uno con vela grande", label: "Portavelas grande" },
+        { src: "vidriera-farolillos-mosaico.jpg", alt: "Dos farolillos blancos con mosaico de vidrio de colores", label: "Farolillo de mosaico" },
+      ] },
+    { nombre: "Vidrieras medianas y grandes", foto: "vidriera-lampara-grande.jpg", precio: "Desde 40,00 €", detalle: "Vidriera hecha a mano",
+      lista: [["Decoración (máx. 20×20 cm)", "desde 40,00 €"], ["Farol con pájaro", "60,00 €"], ["Lámpara mediana", "120,00 €"], ["Lámpara grande", "180,00 €"]], badge: "¡Nuevo!",
+      fotos: [
+        { src: "vidriera-lamparas-medianas.jpg", alt: "Dos lámparas de vidriera azules con margaritas, encendidas", label: "Lámpara mediana" },
+        { src: "vidriera-farol-pajaro.jpg", alt: "Farol blanco con una vidriera de un pájaro entre flores", label: "Farol con pájaro" },
+        { src: "vidriera-decoracion.jpg", alt: "Decoraciones de vidriera: un fantasma en una ventana y figuras colgantes", label: "Decoración" },
+      ] },
     { nombre: "Mochila de saco", foto: "mochila-cerezas.jpg", precio: "12,00 € – 14,00 €", detalle: "Poliéster 12,00 € · Algodón grande 14,00 €", badge: "Lo más pedido",
       fotos: [
         { src: "mockups/m-18.jpg", alt: "Mochila de saco Iron Man", pos: "top", label: "Idea de diseño" },
@@ -286,6 +304,7 @@ const CATALOGO = [
           "<h3>" + esc(p.nombre) + "</h3>" +
           '<p class="price">' + esc(p.precio) + "</p>" +
           (p.detalle ? '<p class="detail">' + esc(p.detalle) + "</p>" : "") +
+          (p.lista ? '<ul class="lista">' + p.lista.map(function (l) { return "<li><span>" + esc(l[0]) + "</span><b>" + esc(l[1]) + "</b></li>"; }).join("") + "</ul>" : "") +
           '<div class="order"><a href="' + wa(p.nombre) + '" target="_blank" rel="noopener">Pedir</a></div>' +
         "</div>" +
       "</article>"
