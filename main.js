@@ -29,6 +29,11 @@ const SITE = {
     a.rel = "noopener";
     if (a.hasAttribute("data-fill")) a.textContent = "@" + SITE.instagram;
   });
+  document.querySelectorAll("[data-instagram-dm]").forEach((a) => {
+    a.href = "https://ig.me/m/" + SITE.instagram;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
   document.querySelectorAll("[data-email]").forEach((a) => {
     if (!SITE.email) {
       (a.closest(".contact-card") || a).remove();
