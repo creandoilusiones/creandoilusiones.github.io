@@ -269,7 +269,7 @@
 <script src="main.js?v=4"></script>
 <script>
 // Fechas límite para pedir (pedidos listos en 1–2 semanas). Cámbialas aquí.
-const PIDE_ANTES = { navidad: "1 de diciembre", reyes: "22 de diciembre" };
+const PIDE_ANTES = { navidad: "1 de diciembre", nochevieja: "15 de diciembre", reyes: "22 de diciembre" };
 
 // Regalos de Navidad: para añadir o cambiar uno, edita esta lista.
 // fotos: [] = se ve "Fotos nuevas muy pronto" hasta que pongas las fotos (nombre del archivo en /fotos)
@@ -437,7 +437,7 @@ const FILTROS = [
   pinta("navidad", proxima(11, 25), "Navidad");
   pinta("nuevo", proxima(0, 1), "Año Nuevo");
   pinta("reyes", proxima(0, 6), "Reyes");
-  document.getElementById("pide").innerHTML = "Para Navidad, antes del <b>" + esc(PIDE_ANTES.navidad) + "</b><br>Para Reyes, antes del <b>" + esc(PIDE_ANTES.reyes) + "</b>";
+  document.getElementById("pide").innerHTML = "Para Navidad, antes del <b>" + esc(PIDE_ANTES.navidad) + "</b><br>Para Nochevieja, antes del <b>" + esc(PIDE_ANTES.nochevieja) + "</b><br>Para Reyes, antes del <b>" + esc(PIDE_ANTES.reyes) + "</b>";
 
   // carta del elfo
   const input = document.getElementById("elf-names");
